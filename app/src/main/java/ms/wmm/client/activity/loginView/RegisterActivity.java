@@ -1,4 +1,4 @@
-package ms.wmm.client.activity;
+package ms.wmm.client.activity.loginView;
 
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;

@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Marcin on 19.08.2016.
  */
 public class GroupHead {
-
+    private Long id;
     private String name;
     private String adminName;
     private List<String> users;
@@ -53,11 +53,19 @@ public class GroupHead {
         this.name = name;
     }
 
-    public String getUsersString(){
-        String usersString="";
-        for(String user:users){
-            usersString+=(user+", ");
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsersString() {
+        String usersString = "";
+        for (String user : users) {
+            usersString += (user + ", ");
         }
-       return usersString.isEmpty()?"":usersString.substring(0,usersString.length()-2);
+        return usersString.isEmpty() ? "" : usersString.substring(0, usersString.length() - 2);
     }
 }

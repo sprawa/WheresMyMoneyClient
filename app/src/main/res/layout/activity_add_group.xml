@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".activity.loginView.RegisterActivity">
+    tools:context=".activity.groupsListView.AddGroupActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -23,30 +23,9 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/loginTxt"
+            android:id="@+id/nameTxt"
             android:layout_gravity="center_horizontal"
-            android:autoText="false"
-            android:hint="login"
-            android:gravity="center_horizontal" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/passwordTxt"
-            android:layout_gravity="center_horizontal"
-            android:hint="hasło"
-            android:gravity="center_horizontal" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/password2Txt"
-            android:layout_gravity="center_horizontal"
-            android:hint="powtórz hasło"
+            android:hint="nazwa"
             android:gravity="center_horizontal" />
 
         <LinearLayout
@@ -68,9 +47,10 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Zarejestruj"
-                android:id="@+id/registerBtn"
+                android:text="Ok"
+                android:id="@+id/okBtn"
                 android:backgroundTint="@color/colorPrimary" />
+
         </LinearLayout>
     </LinearLayout>
 

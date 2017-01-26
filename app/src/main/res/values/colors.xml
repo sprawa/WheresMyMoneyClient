@@ -3,4 +3,8 @@
     <color name="colorPrimary">#fdbf43</color>
     <color name="colorPrimaryDark">#ecb13b</color>
     <color name="colorAccent">#fdbf43</color>
+    <color name="positiveTransaction">#07f400</color>
+    <color name="negativeTransaction">#ef2607</color>
+    <color name="divider">#030000</color>
+
 </resources>

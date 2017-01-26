@@ -1,4 +1,4 @@
-package ms.wmm.client.activity;
+package ms.wmm.client.activity.groupsListView;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -16,24 +18,26 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 import ms.wmm.client.AuthData;
 import ms.wmm.client.R;
+import ms.wmm.client.activity.loginView.LoginActivity;
+import ms.wmm.client.activity.groupView.OpenedGroupActivity;
 import ms.wmm.client.adapter.GroupAdapter;
 import ms.wmm.client.bo.GroupHead;
 
-public class GroupsActivity extends AppCompatActivity {
+public class GroupsListActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private Gson gson;
     private String serverAdress;
     private ListView listView;
-    private GroupsActivity context;
+    private GroupsListActivity context;
 
 
     @Override
@@ -41,13 +45,44 @@ public class GroupsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_groups);
         toolbar=(Toolbar) findViewById(R.id.toolbar);
-        listView=(ListView) findViewById(R.id.groupListView);
+        listView=(ListView) findViewById(R.id.groupsListView);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.app_name);
         serverAdress=getResources().getString(R.string.server);
         gson=new Gson();
         context=this;
+        addListener();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         refreshGroups();
+    }
+
+    private void addListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                GroupHead groupHead= (GroupHead) listView.getItemAtPosition(position);
+                openGroupActivity(groupHead);
+            }
+        });
+    }
+
+    private void openGroupActivity(GroupHead groupHead) {
+        Intent intent;
+        if(groupHead.isOpen()) {
+            intent = new Intent(getApplicationContext(), OpenedGroupActivity.class);
+        }else{
+            intent=null;
+        }
+        Bundle bundle=new Bundle();
+        bundle.putLong("groupId",groupHead.getId());
+        bundle.putBoolean("isAdmin",groupHead.isAdmin());
+        bundle.putStringArrayList("users",new ArrayList<String>(groupHead.getUsers()));
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     @Override
@@ -91,6 +126,8 @@ public class GroupsActivity extends AppCompatActivity {
     }
 
     private void addGroup() {
+        Intent intent=new Intent(getApplicationContext(),AddGroupActivity.class);
+        startActivity(intent);
     }
 
     private void refreshGroups() {

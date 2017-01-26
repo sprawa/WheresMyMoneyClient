@@ -36,4 +36,8 @@ public class GroupAdapter extends ArrayAdapter<GroupHead> {
 
         return itemView;
     }
+
+
+
+
 }

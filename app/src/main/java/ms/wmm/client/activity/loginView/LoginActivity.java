@@ -1,4 +1,4 @@
-package ms.wmm.client.activity;
+package ms.wmm.client.activity.loginView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -12,11 +12,10 @@ import android.widget.Toast;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
-import java.net.ConnectException;
-
 import cz.msebera.android.httpclient.Header;
 import ms.wmm.client.AuthData;
 import ms.wmm.client.R;
+import ms.wmm.client.activity.groupsListView.GroupsListActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -109,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void openGroupsActivity() {
-        Intent intent=new Intent(getApplicationContext(),GroupsActivity.class);
+        Intent intent=new Intent(getApplicationContext(),GroupsListActivity.class);
         startActivity(intent);
     }
 

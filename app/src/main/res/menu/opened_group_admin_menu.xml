@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/option_borrow"
+        android:title="Pożycz" />
+
+    <item android:id="@+id/option_add_user"
+        android:title="Dodaj uzytkownika" />
+
+    <item android:id="@+id/option_refresh"
+        android:title="Odświerz" />
+
+    <item android:id="@+id/option_close_group"
+        android:title="Zamknij grupę" />
+
+    <item android:id="@+id/option_delete_group"
+        android:title="Usuń grupę" />
+
+    <item android:id="@+id/option_logout"
+        android:title="Wyloguj" />
+
+    <item android:id="@+id/option_exit"
+        android:title="Zakończ" />
+
+</menu>
