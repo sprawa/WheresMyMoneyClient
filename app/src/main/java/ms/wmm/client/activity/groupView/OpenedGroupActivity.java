@@ -132,14 +132,34 @@ public class OpenedGroupActivity extends AppCompatActivity {
         Intent intent=new Intent(getApplicationContext(),AddUserActivity.class);
         intent.putExtra("groupId",groupId);
         startActivity(intent);
+        finish();
     }
 
     private void closeGroup() {
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setBasicAuth(AuthData.getUsername(), AuthData.getPassword());
+        client.delete(serverAdress + "/closeGroup?id="+groupId, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                finish();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                if (statusCode == 0)
+                    Toast.makeText(getApplicationContext(), "Serwer nie odpowiada", Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(getApplicationContext(), "Wystąpił nieokreślony błąd", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void borrow() {
         Intent intent=new Intent(getApplicationContext(),AddTransaction.class);
-      //  intent.putExtra("users",users.toArray());
+        Bundle bundle=new Bundle();
+        bundle.putStringArrayList("users",users);
+        bundle.putLong("groupId",groupId);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 

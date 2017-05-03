@@ -26,6 +26,7 @@ import java.util.List;
 import cz.msebera.android.httpclient.Header;
 import ms.wmm.client.AuthData;
 import ms.wmm.client.R;
+import ms.wmm.client.activity.groupView.ClosedGroupActivity;
 import ms.wmm.client.activity.loginView.LoginActivity;
 import ms.wmm.client.activity.groupView.OpenedGroupActivity;
 import ms.wmm.client.adapter.GroupAdapter;
@@ -75,12 +76,15 @@ public class GroupsListActivity extends AppCompatActivity {
         if(groupHead.isOpen()) {
             intent = new Intent(getApplicationContext(), OpenedGroupActivity.class);
         }else{
-            intent=null;
+            intent=new Intent(getApplicationContext(), ClosedGroupActivity.class);
         }
         Bundle bundle=new Bundle();
         bundle.putLong("groupId",groupHead.getId());
         bundle.putBoolean("isAdmin",groupHead.isAdmin());
-        bundle.putStringArrayList("users",new ArrayList<String>(groupHead.getUsers()));
+        ArrayList<String> users=new ArrayList<String>(groupHead.getUsers());
+        users.add(groupHead.getAdminName());
+        users.remove(AuthData.getUsername());
+        bundle.putStringArrayList("users",users);
         intent.putExtras(bundle);
         startActivity(intent);
     }

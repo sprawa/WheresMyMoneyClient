@@ -26,7 +26,8 @@
             android:theme="@style/MenuTheme" />
         <activity android:name=".activity.groupsListView.AddGroupActivity" />
         <activity android:name=".activity.groupView.AddUserActivity" />
-        <activity android:name=".activity.groupView.AddTransaction"></activity>
+        <activity android:name=".activity.groupView.AddTransaction" />
+        <activity android:name=".activity.groupView.ClosedGroupActivity"></activity>
     </application>
 
 </manifest>

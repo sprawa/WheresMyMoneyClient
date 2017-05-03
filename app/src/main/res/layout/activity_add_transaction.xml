@@ -20,21 +20,6 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp">
 
-        <!--<Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner"
-            android:spinnerMode="dialog" />-->
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:id="@+id/userTxt"
-            android:layout_gravity="center_horizontal"
-            android:hint="user"
-            android:gravity="center_horizontal" />
-
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,6 +37,13 @@
             android:id="@+id/descTxt"
             android:layout_gravity="center_horizontal"
             android:hint="Opis"
+            android:gravity="center_horizontal" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/userSpinner"
+            android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal" />
 
         <LinearLayout

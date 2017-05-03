@@ -39,7 +39,7 @@ public class TransactionAdapter extends ArrayAdapter<Transaction> {
         BigDecimal value=transaction.getValue();
         value.setScale(2);
 
-       if(value.compareTo(BigDecimal.ZERO) > 0){
+       if(transaction.isLender()){
            userTxt.setText("od "+transaction.getUser());
            valueTxt.setTextColor(ContextCompat.getColor(getContext(),R.color.positiveTransaction));
 
