@@ -138,7 +138,7 @@ public class OpenedGroupActivity extends AppCompatActivity {
     private void closeGroup() {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setBasicAuth(AuthData.getUsername(), AuthData.getPassword());
-        client.delete(serverAdress + "/closeGroup?id="+groupId, new AsyncHttpResponseHandler() {
+        client.put(serverAdress + "/closeGroup?id="+groupId, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 finish();

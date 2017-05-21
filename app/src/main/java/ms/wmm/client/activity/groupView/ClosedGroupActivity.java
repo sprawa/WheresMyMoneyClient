@@ -6,19 +6,28 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
 
+import org.json.JSONArray;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 import ms.wmm.client.AuthData;
 import ms.wmm.client.R;
 import ms.wmm.client.activity.loginView.LoginActivity;
+import ms.wmm.client.adapter.TransactionAdapter;
+import ms.wmm.client.bo.Transaction;
 
 public class ClosedGroupActivity extends AppCompatActivity {
 
@@ -58,6 +67,26 @@ public class ClosedGroupActivity extends AppCompatActivity {
     }
 
     private void refreshSummary() {
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setBasicAuth(AuthData.getUsername(), AuthData.getPassword());
+        client.get(serverAdress + "/getTransactions?groupId="+groupId, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                Type listType = new TypeToken<List<Transaction>>() {}.getType();
+                List<Transaction> transactions = gson.fromJson(response.toString(), listType);
+                Transaction[] transactionsArray=transactions.toArray(new Transaction[transactions.size()]);
+                ListAdapter adapter = new TransactionAdapter(context,transactionsArray);
+                listView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                if (statusCode == 0)
+                    Toast.makeText(getApplicationContext(), "Serwer nie odpowiada", Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(getApplicationContext(), "Wystąpił nieokreślony błąd", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
