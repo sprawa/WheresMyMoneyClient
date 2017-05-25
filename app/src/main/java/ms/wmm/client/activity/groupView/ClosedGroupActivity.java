@@ -26,7 +26,9 @@ import cz.msebera.android.httpclient.Header;
 import ms.wmm.client.AuthData;
 import ms.wmm.client.R;
 import ms.wmm.client.activity.loginView.LoginActivity;
+import ms.wmm.client.adapter.SummaryAdapter;
 import ms.wmm.client.adapter.TransactionAdapter;
+import ms.wmm.client.bo.Summary;
 import ms.wmm.client.bo.Transaction;
 
 public class ClosedGroupActivity extends AppCompatActivity {
@@ -46,7 +48,7 @@ public class ClosedGroupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_closed_group);
         toolbar=(Toolbar) findViewById(R.id.toolbar);
-        listView=(ListView) findViewById(R.id.listView);
+        listView=(ListView) findViewById(R.id.summaryListView);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.app_name);
@@ -69,13 +71,13 @@ public class ClosedGroupActivity extends AppCompatActivity {
     private void refreshSummary() {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setBasicAuth(AuthData.getUsername(), AuthData.getPassword());
-        client.get(serverAdress + "/getTransactions?groupId="+groupId, new JsonHttpResponseHandler() {
+        client.get(serverAdress + "/getSummaries?groupId="+groupId, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                Type listType = new TypeToken<List<Transaction>>() {}.getType();
-                List<Transaction> transactions = gson.fromJson(response.toString(), listType);
-                Transaction[] transactionsArray=transactions.toArray(new Transaction[transactions.size()]);
-                ListAdapter adapter = new TransactionAdapter(context,transactionsArray);
+                Type listType = new TypeToken<List<Summary>>() {}.getType();
+                List<Summary> transactions = gson.fromJson(response.toString(), listType);
+                Summary[] summariesArray=transactions.toArray(new Summary[transactions.size()]);
+                ListAdapter adapter = new SummaryAdapter(context,summariesArray);
                 listView.setAdapter(adapter);
             }
 

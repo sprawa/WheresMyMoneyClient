@@ -35,7 +35,7 @@ public class GroupAdapter extends ArrayAdapter<GroupHead> {
         if(!group.isOpen())
             name=name+" (closed)";
 
-        nameTextView.setText(group.getName());
+        nameTextView.setText(name);
         adminTextView.setText("Admin: "+group.getAdminName());
         usersTextView.setText("Users: "+group.getUsersString());
 
